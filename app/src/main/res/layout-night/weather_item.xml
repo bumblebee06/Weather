@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="weatherForecast"
+            type="com.mayokunadeniyi.instantweather.data.model.WeatherForecast" />
+        <variable
+            name="weatherForecastDescription"
+            type="com.mayokunadeniyi.instantweather.data.model.NetworkWeatherDescription" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.skydoves.elasticviews.ElasticCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            android:elevation="12dp"
+            app:cardView_duration="250"
+            app:cardView_scale="0.8"
+            android:layout_margin="17dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="170dp"
+                    android:layout_height="124dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="40dp"
+                    android:src="@drawable/ic_big_cloud" />
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_big_cloud" />
+
+                <ImageView
+                    android:layout_width="170dp"
+                    android:layout_height="124dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_cloud" />
+
+
+                <TextView
+                    android:id="@+id/weather_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="10dp"
+                    android:textSize="27sp"
+                    android:textColor="#FFFFFF"
+                    android:text="@{weatherForecastDescription.main}"
+                    android:layout_marginTop="20dp"
+                    tools:text="Clouds" />
+
+                <com.github.pwittchen.weathericonview.WeatherIconView
+                    android:id="@+id/weather_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:weatherIconSize="50"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    setIcon="@{weatherForecastDescription.description}"
+                    app:weatherIconColor="@color/primaryLightColor" />
+
+                <TextView
+                    android:id="@+id/weather_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/weather_main"
+                    android:layout_marginStart="10dp"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="5dp"
+                    android:text="@{weatherForecastDescription.description}"
+                    tools:text="Very cloudy" />
+
+                <TextView
+                    android:id="@+id/city_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/weather_description"
+                    android:layout_marginStart="10dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="140dp"
+                    app:setTemperature="@{weatherForecast.networkWeatherCondition.temp}"
+                    android:textSize="18sp"
+                    tools:text="36\u2103" />
+
+                <LinearLayout
+                    android:id="@+id/weather_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/weather_description"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        style="@style/weather_item_icons"
+                        android:tint="#FFFFFF"
+                        app:srcCompat="@drawable/ic_humidity" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="#FFFFFF"
+                        android:layout_weight="1"
+                        android:text="@{String.valueOf(weatherForecast.networkWeatherCondition.humidity).concat(@string/humidity_symbol)}"
+                        android:textSize="14sp"
+                        tools:text="40" />
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        style="@style/weather_item_icons"
+                        android:tint="#FFFFFF"
+                        app:srcCompat="@drawable/ic_pressure" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:textColor="#FFFFFF"
+                        android:text="@{String.valueOf(weatherForecast.networkWeatherCondition.pressure).concat(@string/pressure_symbol)}"
+                        android:textSize="14sp"
+                        tools:text="40" />
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        style="@style/weather_item_icons"
+                        android:tint="#FFFFFF"
+                        app:srcCompat="@drawable/ic_wind" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:textColor="#FFFFFF"
+                        android:text="@{String.valueOf(weatherForecast.wind.speed).concat(@string/wind_speed_symbol)}"
+                        android:textSize="14sp"
+                        tools:text="40" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="March, 13, 2020"
+                    android:text="@{weatherForecast.date}"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@id/weather_details" />
+            </RelativeLayout>
+        </com.skydoves.elasticviews.ElasticCardView>
+    </LinearLayout>
+</layout>
